@@ -38,13 +38,9 @@ async def welcome_handler(message: types.Message):
     keyboard.row(KeyboardButton('Balance'))
 
     # Send welcome text and include the keyboard
-    await message.answer('Hi!\nI am example bot '
-                         'made for [this article](https://'
-                         'docs.ton.org/develop/dapps/tutorials'
-                         '/accept-payments-in-a-telegram-bot-2).\n'
-                         'My goal is to show how simple it is to receive '
-                         'payments in TonCoin with Python.\n\n'
-                         'Use keyboard to test my functionality.',
+    await message.answer('Hi! I am NiftyBot.\n\n'
+                         'My goal is to assist you with your NiftyFunds.\n\n'
+                         'How can I help you today?',
                          reply_markup=keyboard,
                          parse_mode=ParseMode.MARKDOWN)
 
@@ -75,18 +71,18 @@ async def deposit_handler(message: types.Message):
     # Keyboard with deposit URL
     keyboard = InlineKeyboardMarkup()
     button = InlineKeyboardButton('Deposit',
-                                  url=f'ton://transfer/{config.DEPOSIT_ADDRESS}&text={uid}')
+                                  url=f'ton://transfer/{config.DEPOSIT_ADDRESS}')
+    
     keyboard.add(button)
 
-    # Send text that explains how to make a deposit into bot to user
-    await message.answer('It is very easy to top up your balance here.\n'
-                         'Simply send any amount of TON to this address:\n\n'
+    # Send text that explains how to make a deposit
+    await message.answer('Simply send any amount of TON to this address:\n\n'
                          f'`{config.DEPOSIT_ADDRESS}`\n\n'
                          f'And include the following comment: `{uid}`\n\n'
                          'You can also deposit by clicking the button below.',
                          reply_markup=keyboard,
                          parse_mode=ParseMode.MARKDOWN)
-
+            
 
 if __name__ == '__main__':
     # Create Aiogram executor for our bot
