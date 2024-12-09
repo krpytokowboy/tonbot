@@ -34,7 +34,7 @@ async def welcome_handler(message: types.Message):
 
     # Keyboard with two main buttons: Deposit and Balance
     keyboard = ReplyKeyboardMarkup(resize_keyboard=True)
-    keyboard.row(KeyboardButton('Deposit'))
+    keyboard.row(KeyboardButton('Invest'))
     keyboard.row(KeyboardButton('Balance'))
 
     # Send welcome text and include the keyboard
@@ -61,8 +61,8 @@ async def balance_handler(message: types.Message):
                          parse_mode=ParseMode.MARKDOWN)
 
 
-@dp.message_handler(commands='deposit')
-@dp.message_handler(Text(equals='deposit', ignore_case=True))
+@dp.message_handler(commands='invest')
+@dp.message_handler(Text(equals='invest', ignore_case=True))
 async def deposit_handler(message: types.Message):
     # Function that gives user the address to deposit
 
@@ -70,8 +70,8 @@ async def deposit_handler(message: types.Message):
 
     # Keyboard with deposit URL
     keyboard = InlineKeyboardMarkup()
-    button = InlineKeyboardButton('Deposit',
-                                  url=f'ton://transfer/{config.DEPOSIT_ADDRESS}?text={uid}')
+    button = InlineKeyboardButton('Invest',
+                                  url=f'ton://transfer/{config.DEPOSIT_ADDRESS}')
     
     keyboard.add(button)
 
