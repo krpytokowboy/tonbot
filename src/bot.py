@@ -39,7 +39,6 @@ async def welcome_handler(message: types.Message):
 
     # Send welcome text and include the keyboard
     await message.answer('Hi! I am NiftyBot.\n\n'
-                         'My goal is to assist you with your NiftyFunds.\n\n'
                          'How can I help you today?',
                          reply_markup=keyboard,
                          parse_mode=ParseMode.MARKDOWN)
@@ -73,17 +72,26 @@ async def deposit_handler(message: types.Message):
     button = InlineKeyboardButton('Invest',
                                   url=f'ton://transfer/{config.DEPOSIT_ADDRESS}?=text{uid}')
     
-    keyboard.add(button)
+    # keyboard.add(button)
 
     # Send text that explains how to make a deposit
-    await message.answer('Simply send any amount of TON to this address:\n\n'
-                         f'`{config.DEPOSIT_ADDRESS}`\n\n'
-                         f'And include the following comment: `{uid}`\n\n'
-                         'You can also deposit by clicking the button below.',
+    await message.answer('Simply send any amount of TON to this address:',
                          reply_markup=keyboard,
                          parse_mode=ParseMode.MARKDOWN)
-            
+    
+    await message.answer(f'`{config.DEPOSIT_ADDRESS}`',
+                         reply_markup=keyboard,
+                         parse_mode=ParseMode.MARKDOWN)
 
+    await message.answer(f'And include the following comment:',
+                         reply_markup=keyboard,
+                         parse_mode=ParseMode.MARKDOWN)
+
+    await message.answer(f'`{uid}`',
+                         reply_markup=keyboard,
+                         parse_mode=ParseMode.MARKDOWN)
+                         
+            
 if __name__ == '__main__':
     # Create Aiogram executor for our bot
     ex = executor.Executor(dp)
