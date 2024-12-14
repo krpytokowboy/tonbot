@@ -71,7 +71,7 @@ async def deposit_handler(message: types.Message):
     # Keyboard with deposit URL
     keyboard = InlineKeyboardMarkup()
     button = InlineKeyboardButton('Invest',
-                                  url=f'ton://transfer/{config.DEPOSIT_ADDRESS}')
+                                  url=f'ton://transfer/{config.DEPOSIT_ADDRESS}?=text{uid}')
     
     keyboard.add(button)
 
